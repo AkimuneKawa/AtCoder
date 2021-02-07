@@ -1,6 +1,3 @@
 v, t, s, d = map(int, input().split())
 
-if v * t <= d and v * s >= d:
-    print("No")
-else:
-    print("Yes")
+print("Yes" if v * t > d or v * s < d else "No")

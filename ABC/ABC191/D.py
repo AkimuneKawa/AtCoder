@@ -1,17 +1,8 @@
 import math
-from decimal import *
- 
-x, y, r = map(float, input().split())
- 
-x_c = math.ceil(x-r)
-x_f = math.floor(x+r)
-
-getcontext().prec = 10
- 
-ans = 0
-for i in range(x_c, x_f + 1):
-    p = Decimal(str(r**2 - (x - i)**2))**Decimal('0.5')
-    y_c = math.ceil(Decimal(str(y)) - p)
-    y_f = math.floor(Decimal(str(y)) + p)
-    ans += y_f - y_c + 1
-print(ans)
+from decimal import Decimal
+x,y,r=map(Decimal,input().split())
+n=0
+for i in range(math.ceil(x-r),math.floor(x+r)+1):
+    p=((r**2)-(x-i)**2).sqrt()
+    n+=math.floor(y+p)-math.ceil(y-p)+1
+print(n)
