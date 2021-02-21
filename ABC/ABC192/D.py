@@ -1,20 +1,25 @@
-x = input()
+def f(x, n): # n進法のx
+    x = x[::-1]
+    return sum([int(x[i]) * n ** i for i in range(len(x))])
+
+x = list(map(int, list(input())))
 m = int(input())
 
-l = [int(c) for c in x]
-d = max(l)
-
-l.reverse()
-n = d
-ans = 0
-
-while True:
-    n += 1
-    val = 0
-    for i in range(len(l)):
-        val += l[i] * n ** i
-    if val <= m:
-        ans += 1
+if len(x) == 1:
+    if x[0] <= m:
+        print(1)
     else:
-        break
-print(ans)
+        print(0)
+    exit()
+
+left = max(x)
+right = m + 1
+
+while abs(left - right) > 1:
+    mid = (left + right) // 2
+    if f(x, mid) <= m:
+        left = mid
+    else:
+        right = mid
+
+print(left - max(x))
